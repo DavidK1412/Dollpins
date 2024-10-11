@@ -1,4 +1,4 @@
-INSERT INTO authuser(
+INSERT INTO auth_user(
     id,
     email,
     password,
