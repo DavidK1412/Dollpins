@@ -6,13 +6,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class authuser extends Authenticatable
 {
-    protected $table = 'authuser'; // Solo minúsculas y sin comillas
-    protected $primaryKey = 'id'; // Primary key
-    public $incrementing = false; // Not auto-incrementing because we use UUID
-    protected $keyType = 'string'; // Primary key type
-    public $timestamps = true; // Enable timestamps if you have them in the table
+    protected $table = 'authuser';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    public $timestamps = true;
 
-    protected $fillable = ['id', 'email', 'password', 'active']; // Fillable attributes
+    protected $fillable = ['id', 'email', 'password', 'active'];
 
     public function roles()
     {

@@ -7,7 +7,9 @@
 @section('content')
     <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-dark">
         <div class="card p-4 text-center login-card">
-            <img src="/path/to/logo.png" alt="Logo" class="img-fluid mb-4" style="max-width: 100px;"> <!-- Asegúrate de reemplazar el src con el de tu logo -->
+            <center>
+            <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="img-fluid mb-4" style="max-width: 100px;">
+            </center>
             <h2 class="mb-4">Restablecer contraseña</h2>
             <form id="reset-password-form" action="{{route('password.change')}}" method="POST">
                 @csrf

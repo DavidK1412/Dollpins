@@ -19,7 +19,7 @@ class AuthUserService
     public function create(array $data)
     {
         $data['id'] = Str::uuid();
-        $data['password'] = Hash::make($data['password']); // Encriptar la contraseña
+        $data['password'] = Hash::make($data['password']);
         $user = $this->authUserRepository->create($data);
 
         if ($user) {
@@ -58,5 +58,10 @@ class AuthUserService
     public function delete($id)
     {
         return $this->authUserRepository->delete($id);
+    }
+
+    public function getUserRoles($user_id)
+    {
+        return $this->authUserRepository->getUserRoles($user_id);
     }
 }

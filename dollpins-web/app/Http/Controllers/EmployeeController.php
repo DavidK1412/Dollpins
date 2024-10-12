@@ -13,7 +13,7 @@ use App\Services\CityService;
 use App\Services\PositionService;
 
 
-class EmployeeController
+class EmployeeController extends Controller
 {
     protected EmployeeService $employeeService;
     protected AuthUserService $authUserService;
@@ -52,7 +52,20 @@ class EmployeeController
     public function showEmployee($id)
     {
         $employee = $this->employeeService->getEmployeeById($id);
-        return view('employees.show', compact('employee'));
+        $roles = $this->roleService->getAll();
+        $cities = $this->cityService->getAll();
+        $positions = $this->positionService->getAllPositions();
+        $employeeRoles = $this->authUserService->getUserRoles($employee->user_id);
+        $employeePositions = $this->employeeService->getEmployeePositions($id);
+        $data = [
+            'employee' => $employee,
+            'roles' => $roles,
+            'cities' => $cities,
+            'positions' => $positions,
+            'employeeRoles' => $employeeRoles,
+            'employeePositions' => $employeePositions,
+        ];
+        return view('panels.employees.detail', compact('data'));
     }
 
     public function showCreateForm()
@@ -70,7 +83,6 @@ class EmployeeController
 
     public function storeEmployee(Request $request)
     {
-
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:employee',
@@ -95,7 +107,44 @@ class EmployeeController
         $this->mailService->send($authUser->email, '¡Bienvenido a Dollpins!', 'emails.welcome',
             ['name' => $employee->name, 'url' => route('password.reset', $token)]);
 
-        return redirect()->route('employees.search')->with('success', 'Empleado creado exitosamente.');
+        return redirect()->route('employees.show')->with('success', 'Empleado creado exitosamente.');
+    }
+
+    public function showEditForm($id)
+    {
+        $employee = $this->employeeService->getEmployeeById($id);
+        $roles = $this->roleService->getAll();
+        $cities = $this->cityService->getAll();
+        $positions = $this->positionService->getAllPositions();
+        $employeeRoles = $this->authUserService->getUserRoles($employee->user_id);
+        $employeePositions = $this->employeeService->getEmployeePositions($id);
+        $data = [
+            'employee' => $employee,
+            'roles' => $roles,
+            'cities' => $cities,
+            'positions' => $positions,
+            'employeeRoles' => $employeeRoles,
+            'employeePositions' => $employeePositions,
+        ];
+
+        return view('panels.employees.edit', compact('data'));
+    }
+
+    public function editEmployee(Request $request, $id)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'positions' => 'required',
+            'roles' => 'required',
+        ]);
+
+        $data['city_id'] = $data['city'];
+
+        $this->employeeService->updateEmployee($id, $data);
+        return redirect()->route('employees.show', $id)->with('success', 'Empleado actualizado exitosamente.');
     }
 
     public function deleteEmployee($id)
@@ -103,7 +152,7 @@ class EmployeeController
         $employee = $this->employeeService->getEmployeeById($id);
         $this->employeeService->deleteEmployee($id);
         $this->authUserService->delete($employee->user_id);
-        return redirect()->route('employees.index')->with('success', 'Empleado eliminado exitosamente.');
+        return redirect()->route('employees.show')->with('success', 'Empleado eliminado exitosamente.');
     }
 
 }

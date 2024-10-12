@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class employee extends Model
 {
-    protected $table = 'employee'; // Nombre de la tabla
-    protected $primaryKey = 'id'; // Clave primaria
-    public $incrementing = false; // No es autoincremental porque usamos UUID
-    protected $keyType = 'string'; // Tipo de clave primaria
-    public $timestamps = false; // Esto desactiva el manejo de created_at y updated_at
+    protected $table = 'employee';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    public $timestamps = false;
 
 
     protected $fillable = ['id', 'name', 'document', 'email', 'phone', 'address', 'city_id', 'user_id']; // Atributos asignables

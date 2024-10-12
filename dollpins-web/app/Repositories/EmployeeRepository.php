@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\employee;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeRepository
 {
@@ -45,14 +46,40 @@ class EmployeeRepository
         return $this->employee->find($employee_id)->roles;
     }
 
-    public function assignRole($employee_id, $role_id)
+    public function getEmployeePositions($employee_id)
     {
-        return $this->employee->find($employee_id)->roles()->attach($role_id);
+        return $this->employee->find($employee_id)->positions;
     }
 
-    public function removeRole($employee_id, $role_id)
+    public function assignEmployeePosition($employee_id, $position)
     {
-        return $this->employee->find($employee_id)->roles()->detach($role_id);
+
+        return DB::table('employeeposition')->insert([
+            'id' => \Illuminate\Support\Str::uuid(),
+            'employee_id' => $employee_id,
+            'position_id' => $position
+        ]);
+    }
+
+    public function removeEmployeePosition($employee_id, $position)
+    {
+        return DB::table('employeeposition')->where('employee_id', $employee_id)->where('position_id', $position->position_id)->delete();
+    }
+
+    public function assignRole($employee_id, $role_id)
+    {
+        return DB::table('userrole')->insert([
+            'id' => \Illuminate\Support\Str::uuid(),
+            'user_id' => $employee_id,
+            'role_id' => $role_id
+        ]);
+    }
+
+    public function removeRole($employee_id, $role_id=1)
+    {
+        return DB::table('userrole')
+            ->where('user_id', $employee_id)
+            ->delete();
     }
 
 

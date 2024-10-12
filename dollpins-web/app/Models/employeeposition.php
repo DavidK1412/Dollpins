@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class employeeposition extends Model
 {
-    protected $table = 'employeeposition'; // Nombre de la tabla
-    protected $primaryKey = 'id'; // Clave primaria
-    public $incrementing = false; // No es autoincremental porque usamos UUID
-    protected $keyType = 'string'; // Tipo de clave primaria
+    protected $table = 'employeeposition';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
-    protected $fillable = ['id', 'employee_id', 'position_id']; // Atributos asignables
+    protected $fillable = ['id', 'employee_id', 'position_id'];
 }

@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class userrole extends Model
 {
-    protected $table = 'userrole'; // Nombre de la tabla
-    protected $primaryKey = 'id'; // Clave primaria
-    public $incrementing = false; // No es autoincremental porque usamos UUID
-    protected $keyType = 'string'; // Tipo de clave primaria
-    public $timestamps = false; // Deshabilitar timestamps
+    protected $table = 'userrole';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    public $timestamps = false;
 
     protected $fillable = ['id', 'user_id', 'role_id'];
 

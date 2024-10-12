@@ -23,6 +23,10 @@ class EmployeeService
         public function createEmployee(array $data)
         {
             $data['id'] = Str::uuid();
+            foreach ($data['positions'] as $position) {
+                $data['positions'] = $position;
+            }
+
             return $this->employeeRepository->create($data);
         }
 
@@ -33,6 +37,27 @@ class EmployeeService
 
         public function updateEmployee($id, array $data)
         {
+             $employee = $this->employeeRepository->findById($id);
+             if ($employee->positions != null) {
+                 foreach ($employee->positions as $position) {
+                     $this->employeeRepository->removeEmployeePosition($id, $position);
+                 }
+             }
+
+             $this->employeeRepository->removeRole($employee->user_id);
+
+
+
+             foreach ($data['roles'] as $role) {
+                 $this->employeeRepository->assignRole($employee->user_id, $role);
+             }
+             foreach ($data['positions'] as $position) {
+                $this->employeeRepository->assignEmployeePosition($id, $position);
+             }
+
+            unset($data['city']);
+            unset($data['roles']);
+            unset($data['positions']);
             return $this->employeeRepository->update($id, $data);
         }
 
@@ -44,6 +69,11 @@ class EmployeeService
         public function getEmployeeRoles($employee_id)
         {
             return $this->employeeRepository->getEmployeeRoles($employee_id);
+        }
+
+        public function getEmployeePositions($employee_id)
+        {
+            return $this->employeeRepository->getEmployeePositions($employee_id);
         }
 
         public function assignRole($employee_id, $role_id)

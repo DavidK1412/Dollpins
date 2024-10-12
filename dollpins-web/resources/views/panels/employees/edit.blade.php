@@ -10,58 +10,83 @@
 
 @section('dashboard-panel')
     <div class="form-container">
-        <h2>Agregar nuevo empleado</h2>
+        <h2>Editar empleado</h2>
 
         <img alt="Company logo" class="logo" height="50" src="{{ asset('assets/logo.png') }}" width="50"/>
 
-        <form action="{{route('employee.store')}}" method="POST" id="createForm"
+        <form action="{{Route('employee.update', ['id' => $data['employee']->id])}}" method="POST" id="createForm"
         >
             @csrf
             <div class="row">
                 <div class="col-md-6">
-                    <input name="document" class="form-control" placeholder="Identificacion" type="text"/>
+                    <input value="{{$data['employee']->document}}" class="form-control" placeholder="Identificacion" type="text" disabled>
                 </div>
                 <div class="col-md-6">
-                    <select name="city" class="form-select" id="prepend-button-single-field" data-placeholder="Ciudad">
+                    <select name="city" class="form-select" id="prepend-button-single-field" data-placeholder="Ciudad" required>
                         @foreach($data['cities'] as $city)
-                            <option value="{{$city->id}}">{{$city->name}}</option>
+                            @if( $city->id == $data['employee']->city_id)
+                                <option value="{{$city->id}}" selected>{{$city->name}}</option>
+                            @else
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input name="name" class="form-control" placeholder="Nombre" type="text"/>
+                    <input name="name" value="{{$data['employee']->name}}" class="form-control" placeholder="Nombre" type="text" required/>
                 </div>
                 <div class="col-md-6">
-                    <input name="address" class="form-control" placeholder="Dirección" type="text"/>
+                    <input name="address"  value="{{$data['employee']->address}}" class="form-control" placeholder="Dirección" type="text" required/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input name="phone" class="form-control" placeholder="Teléfono" type="text"/>
+                    <input name="phone" value=" {{$data['employee']->phone }}" class="form-control" placeholder="Teléfono" type="text" required/>
                 </div>
                 <div class="col-md-6">
-                    <select name="roles[]" class="form-control form-select" id="multiple-select-role" data-placeholder="Elige roles" multiple>
+                    <select name="roles[]" class="form-control form-select" id="multiple-select-role" data-placeholder="Elige roles" multiple required>
                         @foreach($data['roles'] as $role)
-                            <option value="{{$role->id}}">{{$role->name}}</option>
+                            @if(!$data['employeeRoles']->isEmpty())
+                                @foreach($data['employeeRoles'] as $employeeRole)
+                                    @if(strtoupper($role->name) == $employeeRole->name)
+                                        <option value="{{$role->id}}" selected>{{$role->name}}</option>
+                                    @else
+                                        <option value="{{$role->id}}">{{$role->name}}</option>
+                                    @endif
+                                @endforeach
+                            @else
+                                <option value="{{$role->id}}">{{$role->name}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input name="email" class="form-control" placeholder="Correo electronico" type="email"/>
+                    <input value="{{ $data['employee']->email }}" name="email" class="form-control" placeholder="Correo electronico" type="email" disabled required/>
                 </div>
                 <div class="col-md-6">
-                    <select name="positions[]" class="form-control form-select" id="multiple-select-position" data-placeholder="Elige los cargos" multiple>
+                    <select name="positions[]" class="form-control form-select" id="multiple-select-position" data-placeholder="Elige los cargos" multiple required>
+
                         @foreach($data['positions'] as $position)
-                            <option value="{{$position->id}}">{{$position->name}}</option>
+                            @if(!$data['employeePositions']->isEmpty())
+                                @foreach($data['employeePositions'] as $employeePosition)
+                                    @if($position->id == $employeePosition->position_id)
+                                        <option value="{{$position->id}}" selected>{{$position->name}}</option>
+                                    @else
+                                        <option value="{{$position->id}}">{{$position->name}}</option>
+                                    @endif
+                                @endforeach
+                            @else
+                                <option value="{{$position->id}}">{{$position->name}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
             </div>
-            <button class="btn btn-custom" type="submit">Agregar Empleado</button>
+            <button class="btn btn-custom" type="submit">Editar Empleado</button>
         </form>
     </div>
 @endsection

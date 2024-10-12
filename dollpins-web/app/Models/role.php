@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class role extends Model
 {
-    protected $table = 'role'; // Nombre de la tabla
-    protected $primaryKey = 'id'; // Clave primaria
-    public $incrementing = true; // Es autoincremental
-    protected $keyType = 'int'; // Tipo de clave primaria
+    protected $table = 'role';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
-    protected $fillable = ['name']; // Atributos asignables
+    protected $fillable = ['name'];
 }

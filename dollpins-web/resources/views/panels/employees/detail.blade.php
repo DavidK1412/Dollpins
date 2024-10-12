@@ -10,58 +10,74 @@
 
 @section('dashboard-panel')
     <div class="form-container">
-        <h2>Agregar nuevo empleado</h2>
+        <h2>Información empleado</h2>
 
         <img alt="Company logo" class="logo" height="50" src="{{ asset('assets/logo.png') }}" width="50"/>
 
-        <form action="{{route('employee.store')}}" method="POST" id="createForm"
+        <form action=""
         >
-            @csrf
             <div class="row">
                 <div class="col-md-6">
-                    <input name="document" class="form-control" placeholder="Identificacion" type="text"/>
+                    <label for="document">Identificación</label>
+                    <input value="{{$data['employee']->document}}" class="form-control" placeholder="Identificacion" type="text" disabled>
                 </div>
                 <div class="col-md-6">
-                    <select name="city" class="form-select" id="prepend-button-single-field" data-placeholder="Ciudad">
+                    <label for="city">Ciudad</label>
+                    <select name="city" class="form-select" id="prepend-button-single-field" data-placeholder="Ciudad" disabled>
                         @foreach($data['cities'] as $city)
-                            <option value="{{$city->id}}">{{$city->name}}</option>
+                            @if( $city->id == $data['employee']->city_id)
+                                <option value="{{$city->id}}" selected>{{$city->name}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input name="name" class="form-control" placeholder="Nombre" type="text"/>
+                    <label for="name">Nombre</label>
+                    <input name="name" value="{{$data['employee']->name}}" class="form-control" placeholder="Nombre" type="text" disabled/>
                 </div>
                 <div class="col-md-6">
-                    <input name="address" class="form-control" placeholder="Dirección" type="text"/>
+                    <label for="address">Dirección</label>
+                    <input name="address"  value="{{$data['employee']->address}}" class="form-control" placeholder="Dirección" type="text" disabled/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input name="phone" class="form-control" placeholder="Teléfono" type="text"/>
+                    <label for="phone">Teléfono</label>
+                    <input name="phone" value=" {{$data['employee']->phone }}" class="form-control" placeholder="Teléfono" type="text" disabled/>
                 </div>
                 <div class="col-md-6">
-                    <select name="roles[]" class="form-control form-select" id="multiple-select-role" data-placeholder="Elige roles" multiple>
+                    <label for="roles">Roles</label>
+                    <select name="roles[]" class="form-control form-select" id="multiple-select-role" data-placeholder="Elige roles" multiple disabled>
                         @foreach($data['roles'] as $role)
-                            <option value="{{$role->id}}">{{$role->name}}</option>
+                            @foreach($data['employeeRoles'] as $employeeRole)
+                                @if(strtoupper($role->name) == $employeeRole->name)
+                                    <option value="{{$role->id}}" selected>{{$role->name}}</option>
+                                @endif
+                            @endforeach
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input name="email" class="form-control" placeholder="Correo electronico" type="email"/>
+                    <label for="email">Correo electronico</label>
+                    <input value="{{ $data['employee']->email }}" name="email" class="form-control" placeholder="Correo electronico" type="email" disabled/>
                 </div>
                 <div class="col-md-6">
-                    <select name="positions[]" class="form-control form-select" id="multiple-select-position" data-placeholder="Elige los cargos" multiple>
+                    <label for="positions">Cargos</label>
+                    <select name="positions[]" class="form-control form-select" id="multiple-select-position" data-placeholder="Elige los cargos" multiple disabled>
                         @foreach($data['positions'] as $position)
-                            <option value="{{$position->id}}">{{$position->name}}</option>
+                            @foreach($data['employeePositions'] as $employeePosition)
+                                @if($position->id == $employeePosition->position_id)
+                                    <option value="{{$position->id}}" selected>{{$position->name}}</option>
+                                @endif
+                            @endforeach
                         @endforeach
                     </select>
                 </div>
             </div>
-            <button class="btn btn-custom" type="submit">Agregar Empleado</button>
         </form>
     </div>
 @endsection
@@ -87,17 +103,5 @@
             width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
             placeholder: $( this ).data( 'placeholder' ),
         } );
-
-        const form = document.getElementById('createForm');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const roles = $('#multiple-select-role').val();
-            const positions = $('#multiple-select-position').val();
-            formData.append('jsonRoles', JSON.stringify(roles)); // change value of the select to the array
-            formData.append('jsonPositions', JSON.stringify(positions));
-
-            form.submit();
-        });
     </script>
 @endsection

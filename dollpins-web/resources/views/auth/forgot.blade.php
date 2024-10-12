@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-dark">
         <div class="card p-4 text-center login-card">
-            <img src="https://media.canva.com/v2/image-resize/format:PNG/height:198/quality:100/uri:s3%3A%2F%2Fmedia-private.canva.com%2FAoVmU%2FMAGR0MAoVmU%2F1%2Fp.png/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAD0WG9pbViiOxE4llKrZV_R051IUMs7S5HmtNaXrwAxS&exp=1728584289&osig=AAAAAAAAAAAAAAAAAAAAAImbBVKy3JKThlTGkE12iiPQHXbDWITQYVCpikNZfWp1&signer=media-rpc&x-canva-quality=thumbnail" alt="Logo" class="mb-3" id="logo">
+            <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="mb-3" id="logo">
             <h2 class="mb-3">Recupera tu contraseña</h2>
             <p>Ingresa tu correo electrónico y te enviaremos un enlace para que recuperes el acceso a tu cuenta.</p>
             <form

@@ -10,7 +10,7 @@ class recoverypassword extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
-    public $timestamps = false; // Esto desactiva el manejo de created_at y updated_at
+    public $timestamps = false;
 
     protected $fillable = ['id', 'user_id', 'token'];
 

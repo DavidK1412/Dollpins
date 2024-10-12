@@ -46,11 +46,11 @@ class AuthController extends Controller
         ]);
 
         if ($this->authUserService->login($credentials)) {
-            return redirect()->intended('/'); // Redirigir a la página de inicio o a la página deseada
+            return redirect()->route('dashboard');
         }
 
-        return back()->withErrors([
-            'email' => 'Las credenciales proporcionadas son incorrectas.',
+        return back()->with([
+            'error' => 'Las credenciales proporcionadas son incorrectas.',
         ]);
     }
 

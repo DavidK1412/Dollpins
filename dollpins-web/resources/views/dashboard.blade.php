@@ -13,34 +13,43 @@
     <div class="sidebar" id="sidebar">
         <div>
             <div class="sidebar-header">
-                <img alt="Company Logo" height="50" src="https://storage.googleapis.com/a1aa/image/MkUuT3m5z7KFPZ1qOQXoATdMOSF8NHkOBymgcbi1xSdBHb5E.jpg" width="50"/>
+                <img alt="Company Logo" height="50" src="{{ asset('assets/logo.png') }}" width="50"/>
                 <h2>
                     Dollpins
                 </h2>
             </div>
             <hr/>
-            <a href="#">
-                Empleados
-            </a>
+            @if(hasRole('ADMIN'))
+                <a href="{{ Route('employees.show') }}">
+                    Empleados
+                </a>
+            @endif
+            @if(hasRole(['ADMIN', 'STOCK']))
             <a href="#">
                 Productos
             </a>
+            @endif
+            @if(hasRole(['ADMIN', 'SALES']))
             <a href="#">
                 Clientes
             </a>
+
             <a href="#">
                 Pedidos
             </a>
+            @endif
+            @if(hasRole(['ADMIN', 'FINANCES']))
             <a href="#">
                 Finanzas
             </a>
             <a href="#">
                 Estadísticas
             </a>
+            @endif
         </div>
-        <a href="#" style="margin-top: auto;">
+        <a href="{{Route('logout')}}" style="margin-top: auto;">
             <i class="bi bi-arrow-bar-left"></i>
-            {{ Auth::user()  }}
+            {{ getEmployeeName() }}
         </a>
     </div>
     <div class="content">
