@@ -1,65 +1,125 @@
-CREATE TABLE IF NOT EXISTS AuthUser (
-    id VARCHAR(36) PRIMARY KEY NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    active BOOLEAN NOT NULL DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+create table if not exists authuser
+(
+    id         varchar(36)             not null
+        primary key,
+    email      varchar(255)            not null
+        unique,
+    password   varchar(255)            not null,
+    active     boolean   default false not null,
+    created_at timestamp default CURRENT_TIMESTAMP,
+    updated_at timestamp default CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS Role (
-    id SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+create table if not exists role
+(
+    id         serial
+        primary key,
+    name       varchar(255) not null,
+    created_at timestamp default CURRENT_TIMESTAMP,
+    updated_at timestamp default CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS UserRole (
-    id VARCHAR(36) PRIMARY KEY NOT NULL UNIQUE,
-    user_id VARCHAR(36) NOT NULL,
-    role_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES AuthUser(id),
-    FOREIGN KEY (role_id) REFERENCES Role(id)
+create table if not exists userrole
+(
+    id      varchar(36) not null
+        primary key,
+    user_id varchar(36) not null
+        references authuser,
+    role_id integer     not null
+        references role
 );
 
-CREATE TABLE IF NOT EXISTS RecoveryPassword (
-    id VARCHAR(36) PRIMARY KEY NOT NULL,
-    user_id VARCHAR(36) NOT NULL,
-    token VARCHAR(255) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES AuthUser(id)
+create table if not exists recoverypassword
+(
+    id      varchar(36)  not null
+        primary key,
+    user_id varchar(36)  not null
+        references authuser,
+    token   varchar(255) not null
 );
 
-CREATE TABLE IF NOT EXISTS City (
-    id SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+create table if not exists city
+(
+    id         serial
+        primary key,
+    name       varchar(255) not null,
+    created_at timestamp default CURRENT_TIMESTAMP,
+    updated_at timestamp default CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS Position (
-    id SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+create table if not exists position
+(
+    id         serial
+        primary key,
+    name       varchar(255) not null,
+    created_at timestamp default CURRENT_TIMESTAMP,
+    updated_at timestamp default CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS Employee (
-    id VARCHAR(36) PRIMARY KEY NOT NULL UNIQUE,
-    name VARCHAR(255) NOT NULL,
-    document VARCHAR(15) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    phone VARCHAR(15) NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    city_id INT NOT NULL,
-    user_id VARCHAR(36) NOT NULL,
-    FOREIGN KEY (city_id) REFERENCES City(id),
-    FOREIGN KEY (user_id) REFERENCES AuthUser(id)
+create table if not exists employee
+(
+    id       varchar(36)  not null
+        primary key,
+    name     varchar(255) not null,
+    document varchar(15)  not null,
+    email    varchar(255) not null,
+    phone    varchar(15)  not null,
+    address  varchar(255) not null,
+    city_id  integer      not null
+        references city,
+    user_id  varchar(36)  not null
+        references authuser,
+    status   integer
 );
 
-CREATE TABLE IF NOT EXISTS EmployeePosition (
-    id VARCHAR(36) PRIMARY KEY NOT NULL UNIQUE,
-    employee_id VARCHAR(36) NOT NULL,
-    position_id INT NOT NULL,
-    FOREIGN KEY (employee_id) REFERENCES Employee(id),
-    FOREIGN KEY (position_id) REFERENCES Position(id)
+create table if not exists employeeposition
+(
+    id          varchar(36) not null
+        primary key,
+    employee_id varchar(36) not null
+        references employee,
+    position_id integer     not null
+        references position
 );
+
+create table if not exists migrations
+(
+    id        serial
+        primary key,
+    migration varchar(255) not null,
+    batch     integer      not null
+);
+
+create table if not exists sessions
+(
+    id            varchar(255) not null
+        primary key,
+    user_id       varchar(36),
+    ip_address    varchar(45),
+    user_agent    text,
+    payload       text         not null,
+    last_activity integer      not null
+);
+
+create index if not exists sessions_last_activity_index
+    on sessions (last_activity);
+
+create index if not exists sessions_user_id_index
+    on sessions (user_id);
+
+create table if not exists cache
+(
+    key        varchar(255) not null
+        primary key,
+    value      text         not null,
+    expiration integer      not null
+);
+
+create table if not exists cache_locks
+(
+    key        varchar(255) not null
+        primary key,
+    owner      varchar(255) not null,
+    expiration integer      not null
+);
+
