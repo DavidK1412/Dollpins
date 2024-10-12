@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+.sidebar {
+    background-color: #8fd6c8;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.sidebar-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.sidebar-header h2 {
+    font-size: 18px;
+    margin: 0;
+    color: white;
+}
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 10px 0;
+    text-decoration: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.sidebar a:hover {
+    background-color: #d1e7dd;
+    border-radius: 20px;
+    color: black;
+}
+.sidebar hr {
+    border: 1px solid #d1e7dd;
+    margin: 10px 0;
+}
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
+.content h1 {
+    font-size: 24px;
+}
+.content h2 {
+    font-size: 18px;
+    color: gray;
+}
+.btn-add {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.btn-add:hover {
+    background-color: #45a049;
+}
+.table-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination .page-item.active .page-link {
+    background-color: black;
+    border-color: black;
+}
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background-color: #8fd6c8;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    .content {
+        margin-left: 0;
+        padding: 10px;
+    }
+    .btn-add {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .table-container {
+        padding: 10px;
+    }
+    .sidebar-toggle {
+        display: block;
+    }
+}
