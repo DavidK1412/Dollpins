@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\employee;
+use App\Models\Employee;
 
 if (!function_exists('hasRole')) {
     function hasRole($roles)
@@ -29,7 +29,7 @@ if (!function_exists('getEmployeeName')) {
     function getEmployeeName()
     {
         $id = Auth::user()->id;
-        $employee = employee::where('user_id', $id)->first();
+        $employee = Employee::where('user_id', $id)->first();
         return $employee->name;
     }
 }

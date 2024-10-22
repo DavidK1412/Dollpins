@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class userrole extends Model
+class UserRole extends Model
 {
-    protected $table = 'userrole';
+    protected $table = 'UserRole';
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -16,11 +16,11 @@ class userrole extends Model
 
     public function user()
     {
-        return $this->belongsTo(authuser::class, 'user_id');
+        return $this->belongsTo(AuthUser::class, 'user_id');
     }
 
     public function role()
     {
-        return $this->belongsTo(role::class, 'role_id');
+        return $this->belongsTo(Role::class, 'role_id');
     }
 }

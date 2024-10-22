@@ -2,15 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Models\employee;
+use App\Models\Employee;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeRepository
 {
 
-    protected employee $employee;
+    protected Employee $employee;
 
-    public function __construct(employee $employee)
+    public function __construct(Employee $employee)
     {
         $this->employee = $employee;
     }
@@ -68,7 +68,7 @@ class EmployeeRepository
 
     public function assignRole($employee_id, $role_id)
     {
-        return DB::table('userrole')->insert([
+        return DB::table('UserRole')->insert([
             'id' => \Illuminate\Support\Str::uuid(),
             'user_id' => $employee_id,
             'role_id' => $role_id
@@ -77,7 +77,7 @@ class EmployeeRepository
 
     public function removeRole($employee_id, $role_id=1)
     {
-        return DB::table('userrole')
+        return DB::table('UserRole')
             ->where('user_id', $employee_id)
             ->delete();
     }

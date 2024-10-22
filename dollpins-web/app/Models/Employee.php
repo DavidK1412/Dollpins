@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class employee extends Model
+class Employee extends Model
 {
-    protected $table = 'employee';
+    protected $table = 'Employee';
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -17,17 +17,17 @@ class employee extends Model
 
     public function user()
     {
-        return $this->belongsTo(authuser::class, 'user_id');
+        return $this->belongsTo(AuthUser::class, 'user_id');
     }
 
     public function city()
     {
-        return $this->belongsTo(city::class, 'city_id');
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     public function positions()
     {
-        return $this->hasMany(employeeposition::class, 'employee_id');
+        return $this->hasMany(EmployeePosition::class, 'employee_id');
     }
 
 }

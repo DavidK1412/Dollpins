@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class city extends Model
+class position extends Model
 {
-    protected $table = 'city';
+    protected $table = 'Position';
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $keyType = 'int';

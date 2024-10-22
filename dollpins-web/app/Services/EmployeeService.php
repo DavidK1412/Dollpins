@@ -55,9 +55,8 @@ class EmployeeService
                 $this->employeeRepository->assignEmployeePosition($id, $position);
              }
 
-            unset($data['city']);
-            unset($data['roles']);
-            unset($data['positions']);
+            unset($data['city'], $data['roles'], $data['positions']);
+
             return $this->employeeRepository->update($id, $data);
         }
 
