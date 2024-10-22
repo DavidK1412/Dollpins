@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class authuser extends Authenticatable
+class AuthUser extends Authenticatable
 {
-    protected $table = 'authuser';
+    protected $table = 'AuthUser';
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -16,6 +16,6 @@ class authuser extends Authenticatable
 
     public function roles()
     {
-        return $this->hasMany(userrole::class, 'user_id');
+        return $this->hasMany(UserRole::class, 'user_id');
     }
 }

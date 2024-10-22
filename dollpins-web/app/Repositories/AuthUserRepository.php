@@ -2,25 +2,25 @@
 
 namespace App\Repositories;
 
-use App\Models\authuser;
-use App\Models\userrole;
+use App\Models\AuthUser;
+use App\Models\UserRole;
 use Illuminate\Support\Facades\DB;
 
 class AuthUserRepository
 {
     public function findByEmail($email)
     {
-        return authuser::where('email', $email)->first();
+        return AuthUser::where('email', $email)->first();
     }
 
     public function create(array $data)
     {
-        return authuser::create($data);
+        return AuthUser::create($data);
     }
 
     public function assignRole($user_id, $role_id)
     {
-        return userrole::create([
+        return UserRole::create([
             'id' => \Illuminate\Support\Str::uuid(),
             'user_id' => $user_id,
             'role_id' => $role_id
@@ -29,27 +29,27 @@ class AuthUserRepository
 
     public function getUserRoles($user_id)
     {
-        return DB::table('authuser')
-            ->join('userrole', 'authuser.id', '=', 'userrole.user_id')
-            ->join('role', 'userrole.role_id', '=', 'role.id')
-            ->where('authuser.id', $user_id)
-            ->select('role.name')
+        return DB::table('AuthUser')
+            ->join('UserRole', 'AuthUser.id', '=', 'UserRole.user_id')
+            ->join('Role', 'UserRole.role_id', '=', 'Role.id')
+            ->where('AuthUser.id', $user_id)
+            ->select('Role.name')
             ->get();
     }
 
     public function updatePassword($user_id, $password)
     {
-        return authuser::where('id', $user_id)->update(['password' => $password]);
+        return AuthUser::where('id', $user_id)->update(['password' => $password]);
     }
 
     public function activateUser($user_id)
     {
-        return authuser::where('id', $user_id)->update(['active' => true]);
+        return AuthUser::where('id', $user_id)->update(['active' => true]);
     }
 
     public function delete($id)
     {
-        return authuser::where('id', $id)->update(['active' => false]);
+        return AuthUser::where('id', $id)->update(['active' => false]);
     }
 
 }

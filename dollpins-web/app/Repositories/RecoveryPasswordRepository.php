@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Models\recoverypassword;
+use App\Models\RecoveryPassword;
 
 class RecoveryPasswordRepository
 {
     public function createToken($user_id, $token)
     {
-        return recoverypassword::create([
+        return RecoveryPassword::create([
             'id' => \Illuminate\Support\Str::uuid(),
             'user_id' => $user_id,
             'token' => $token
@@ -17,12 +17,12 @@ class RecoveryPasswordRepository
 
     public function getByToken($token)
     {
-        return recoverypassword::where('token', $token)->first();
+        return RecoveryPassword::where('token', $token)->first();
     }
 
     public function deleteByUserId($userId)
     {
-        return recoverypassword::where('user_id', $userId)->delete();
+        return RecoveryPassword::where('user_id', $userId)->delete();
     }
 
 }

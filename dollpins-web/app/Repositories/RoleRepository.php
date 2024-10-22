@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\role;
+use App\Models\Role;
 
 class RoleRepository
 {
 
-        protected role $role;
+        protected Role $role;
 
-        public function __construct(role $role)
+        public function __construct(Role $role)
         {
             $this->role = $role;
         }

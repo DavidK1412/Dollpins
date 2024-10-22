@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class recoverypassword extends Model
+class RecoveryPassword extends Model
 {
-    protected $table = 'recoverypassword';
+    protected $table = 'RecoveryPassword';
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -16,6 +16,6 @@ class recoverypassword extends Model
 
     public function user()
     {
-        return $this->belongsTo(authuser::class, 'user_id');
+        return $this->belongsTo(AuthUser::class, 'user_id');
     }
 }

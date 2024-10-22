@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\city;
+use App\Models\City;
 
 class CityRepository
 {
 
-    protected city $city;
+    protected City $city;
 
-    public function __construct(city $city)
+    public function __construct(City $city)
     {
         $this->city = $city;
     }
