@@ -43,9 +43,6 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input name="phone" value=" {{$data['employee']->phone }}" class="form-control" placeholder="Teléfono" type="text" required/>
-                </div>
-                <div class="col-md-6">
                     <select name="roles[]" class="form-control form-select" id="multiple-select-role" data-placeholder="Elige roles" multiple required>
                         @foreach($data['roles'] as $role)
                             @if(!$data['employeeRoles']->isEmpty())

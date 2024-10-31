@@ -39,9 +39,6 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input name="phone" class="form-control" placeholder="Teléfono" type="text"/>
-                </div>
-                <div class="col-md-6">
                     <select name="roles[]" class="form-control form-select" id="multiple-select-role" data-placeholder="Elige roles" multiple>
                         @foreach($data['roles'] as $role)
                             <option value="{{$role->id}}">{{$role->name}}</option>

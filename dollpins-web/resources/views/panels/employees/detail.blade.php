@@ -44,10 +44,6 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label for="phone">Teléfono</label>
-                    <input name="phone" value=" {{$data['employee']->phone }}" class="form-control" placeholder="Teléfono" type="text" disabled/>
-                </div>
-                <div class="col-md-6">
                     <label for="roles">Roles</label>
                     <select name="roles[]" class="form-control form-select" id="multiple-select-role" data-placeholder="Elige roles" multiple disabled>
                         @foreach($data['roles'] as $role)
