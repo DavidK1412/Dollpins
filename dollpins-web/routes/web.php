@@ -29,15 +29,28 @@ Route::post('/dashboard/employee/new', [EmployeeController::class, 'storeEmploye
 Route::get('/dashboard/employee/{id}', [EmployeeController::class, 'showEmployee'])->name('employee.show')->middleware(
     ['auth', RoleMiddleware::class.':ADMIN']
 );
+Route::get('/dashboard/employee/{id}/cellphone', [EmployeeController::class, 'showEmployeeCellphones'])->name('employee.phone')->middleware(
+    ['auth', RoleMiddleware::class.':ADMIN']);
+
 Route::get('/dashboard/employee/{id}/edit', [EmployeeController::class, 'showEditForm'])->name('employee.edit')->middleware(
     ['auth', RoleMiddleware::class.':ADMIN']
 );
 Route::post('/dashboard/employee/{id}/edit', [EmployeeController::class, 'editEmployee'])->name('employee.update')->middleware(
     ['auth', RoleMiddleware::class.':ADMIN']
 );
+Route::post('/dashboard/employee/{id}/cellphone', [EmployeeController::class, 'storeCellphone'])->name('employee.phone.store')->middleware(
+    ['auth', RoleMiddleware::class.':ADMIN']);
+
+Route::put('/dashboard/employee/{id}/cellphone', [EmployeeController::class, 'updateCellphone'])->name('employee.phone.update')->middleware(
+     ['auth', RoleMiddleware::class.':ADMIN']);    
+
 Route::get('/dashboard/employee/{id}/delete', [EmployeeController::class, 'deleteEmployee'])->name('employee.delete')->middleware(
     ['auth', RoleMiddleware::class.':ADMIN']
 );
 Route::get('/dashboard', function () {
     return view('panels.default');
 })->middleware(['auth'])->name('dashboard');
+
+Route::delete('/dashboard/employee/{id}/cellphone', [EmployeeController::class, 'deleteCellphone'])
+    ->name('employee.phone.delete')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN']);

@@ -25,6 +25,7 @@
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->email }}</td>
                     <td>
+                        <a href="{{Route('employee.phone', ['id' => $employee->id])}}" class="btn btn-info"><i class="bi bi-telephone"></i> Teléfonos</a>
                         <a href="{{Route('employee.show', ['id' => $employee->id])}}" class="btn btn-info"><i class="bi bi-eye"></i> Ver</a>
 
                         <a href="{{Route('employee.edit', ['id' => $employee->id])}}" class="btn btn-primary"><i class="bi bi-pencil"></i> Editar</a>

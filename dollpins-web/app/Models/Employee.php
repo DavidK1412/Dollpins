@@ -13,7 +13,7 @@ class Employee extends Model
     public $timestamps = false;
 
 
-    protected $fillable = ['id', 'name', 'document', 'email', 'phone', 'address', 'city_id', 'user_id']; // Atributos asignables
+    protected $fillable = ['id', 'name', 'document', 'email', 'address', 'city_id', 'user_id']; // Atributos asignables
 
     public function user()
     {
@@ -28,6 +28,11 @@ class Employee extends Model
     public function positions()
     {
         return $this->hasMany(EmployeePosition::class, 'employee_id');
+    }
+
+    public function cellphones()
+    {
+        return $this->hasMany(EmployeeCellphone::class, 'employee_id');
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Employee;
+use App\Models\EmployeeCellphone;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeRepository
@@ -79,6 +80,22 @@ class EmployeeRepository
     {
         return DB::table('UserRole')
             ->where('user_id', $employee_id)
+            ->delete();
+    }
+
+    public function assignEmployeeCellphone($employee_id, $cellphone, $relationship)
+    {
+        return EmployeeCellphone::create([
+            'employee_id' => $employee_id,
+            'cellphone' => $cellphone,
+            'relationship' => $relationship,
+        ]);
+    }
+
+    public function removeEmployeeCellphone($employee_id, $cellphone_id)
+    {
+        return EmployeeCellphone::where('employee_id', $employee_id)
+            ->where('id', $cellphone_id)
             ->delete();
     }
 

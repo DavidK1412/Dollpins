@@ -84,4 +84,28 @@ class EmployeeService
         {
             return $this->employeeRepository->removeRole($employee_id, $role_id);
         }
-}
+
+        public function assignEmployeeCellphone($employee_id, $cellphone, $relationship)
+        {
+            return $this->employeeRepository->assignEmployeeCellphone($employee_id, $cellphone, $relationship);
+        }
+
+        public function removeEmployeeCellphone($employee_id, $cellphone_id)
+        {
+            return $this->employeeRepository->removeEmployeeCellphone($employee_id, $cellphone_id);
+        }
+
+        public function updateEmployeeCellphone($employee_id, $phone_id, $phone_number, $relationship)
+        {
+            $employee = $this->getEmployeeById($employee_id);
+            
+            $cellphone = $employee->cellphones()
+                ->where('id', $phone_id)
+                ->firstOrFail();
+            
+            $cellphone->update([
+                'cellphone' => $phone_number,
+                'relationship' => $relationship
+            ]);
+        }
+    }
