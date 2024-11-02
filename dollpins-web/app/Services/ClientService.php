@@ -22,6 +22,7 @@ class ClientService
     public function createClient(array $data)
     {
         $data['id'] = Str::uuid();
+        $data['status'] = 1;
 
         return $this->clientRepository->create($data);
     }

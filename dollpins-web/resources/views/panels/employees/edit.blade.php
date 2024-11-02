@@ -43,6 +43,9 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
+                    <input value="{{ $data['employee']->email }}" name="email" class="form-control" placeholder="Correo electronico" type="email" disabled required/>
+                </div>
+                <div class="col-md-6">
                     <select name="roles[]" class="form-control form-select" id="multiple-select-role" data-placeholder="Elige roles" multiple required>
                         @foreach($data['roles'] as $role)
                             @if(!$data['employeeRoles']->isEmpty())
@@ -61,10 +64,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <input value="{{ $data['employee']->email }}" name="email" class="form-control" placeholder="Correo electronico" type="email" disabled required/>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <select name="positions[]" class="form-control form-select" id="multiple-select-position" data-placeholder="Elige los cargos" multiple required>
 
                         @foreach($data['positions'] as $position)
@@ -83,6 +83,7 @@
                     </select>
                 </div>
             </div>
+            <br>
             <button class="btn btn-custom" type="submit">Editar Empleado</button>
         </form>
     </div>

@@ -24,13 +24,15 @@
                     Empleados
                 </a>
             @endif
-            @if(hasRole(['ADMIN', 'STOCK']))
-            <a href="#">
+            @if(hasRole(['ADMIN', 'STOCK', 'SALES']))
+            <a href="{{ Route('products.index') }}">
                 Productos
             </a>
             @endif
             @if(hasRole(['ADMIN', 'SALES']))
-            <a href="#">
+            <a href="
+                {{ Route('clients.index') }}
+            ">
                 Clientes
             </a>
 

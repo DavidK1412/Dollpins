@@ -18,4 +18,9 @@ class CityService
         return $this->cityRepository->all();
     }
 
+    public function getCityById($id)
+    {
+        return $this->cityRepository->findById($id);
+    }
+
 }
