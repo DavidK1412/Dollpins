@@ -55,7 +55,7 @@ class EmployeeRepository
     public function assignEmployeePosition($employee_id, $position)
     {
 
-        return DB::table('employeeposition')->insert([
+        return DB::table('EmployeePosition')->insert([
             'id' => \Illuminate\Support\Str::uuid(),
             'employee_id' => $employee_id,
             'position_id' => $position
@@ -64,7 +64,7 @@ class EmployeeRepository
 
     public function removeEmployeePosition($employee_id, $position)
     {
-        return DB::table('employeeposition')->where('employee_id', $employee_id)->where('position_id', $position->position_id)->delete();
+        return DB::table('EmployeePosition')->where('employee_id', $employee_id)->where('position_id', $position->position_id)->delete();
     }
 
     public function assignRole($employee_id, $role_id)
