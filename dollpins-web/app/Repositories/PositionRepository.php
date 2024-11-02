@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\position;
+use App\Models\Position;
 
 class PositionRepository
 {
