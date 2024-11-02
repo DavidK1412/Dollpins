@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    protected $table = 'client';
+    protected $table = 'Client';
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';

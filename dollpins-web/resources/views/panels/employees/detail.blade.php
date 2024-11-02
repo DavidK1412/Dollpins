@@ -44,6 +44,10 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
+                    <label for="email">Correo electronico</label>
+                    <input value="{{ $data['employee']->email }}" name="email" class="form-control" placeholder="Correo electronico" type="email" disabled/>
+                </div>
+                <div class="col-md-6">
                     <label for="roles">Roles</label>
                     <select name="roles[]" class="form-control form-select" id="multiple-select-role" data-placeholder="Elige roles" multiple disabled>
                         @foreach($data['roles'] as $role)
@@ -57,11 +61,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <label for="email">Correo electronico</label>
-                    <input value="{{ $data['employee']->email }}" name="email" class="form-control" placeholder="Correo electronico" type="email" disabled/>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="positions">Cargos</label>
                     <select name="positions[]" class="form-control form-select" id="multiple-select-position" data-placeholder="Elige los cargos" multiple disabled>
                         @foreach($data['positions'] as $position)
@@ -75,6 +75,8 @@
                 </div>
             </div>
         </form>
+        <br>
+        <a href="{{ route('employees.show') }}" class="btn btn-custom" type="submit">Volver</a>
     </div>
 @endsection
 

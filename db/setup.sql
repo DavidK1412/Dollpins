@@ -142,7 +142,9 @@ CREATE TABLE IF NOT EXISTS "Client" (
     cellphone varchar(15) NOT NULL,
     address varchar(255) NOT NULL,
     postal_code varchar(10) NOT NULL,
-    mail varchar(255) NOT NULL
+    mail varchar(255) NOT NULL,
+    id_city integer NOT NULL REFERENCES "City",
+    status integer
 );
 
 CREATE TABLE IF NOT EXISTS "Category" (
@@ -156,5 +158,6 @@ CREATE TABLE IF NOT EXISTS "Product" (
     description text NOT NULL,
     price decimal NOT NULL,
     stock integer NOT NULL,
-    category_id integer NOT NULL REFERENCES "Category"
+    category_id integer NOT NULL REFERENCES "Category",
+    status integer
 );
