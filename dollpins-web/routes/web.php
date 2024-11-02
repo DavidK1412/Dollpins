@@ -59,59 +59,59 @@ Route::delete('/dashboard/employee/{id}/cellphone', [EmployeeController::class, 
 
 Route::get('/dashboard/clients', [ClientController::class, 'showClients'])
     ->name('clients.index')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, SALES']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::post('/dashboard/clients/new', [ClientController::class, 'createClient'])
     ->name('clients.store')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, SALES']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::get('/dashboard/clients/new', [ClientController::class, 'showCreateForm'])
     ->name('clients.new')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, SALES']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::get('/dashboard/clients/{id}', [ClientController::class, 'showClient'])
     ->name('clients.show')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, SALES']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::get('/dashboard/clients/{id}/edit', [ClientController::class, 'showEditForm'])
     ->name('clients.edit')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, SALES']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::post('/dashboard/clients/{id}/edit', [ClientController::class, 'updateClient'])
     ->name('clients.update')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, SALES']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::delete('/dashboard/clients', [ClientController::class, 'deleteClient'])
     ->name('clients.delete')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, SALES']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::get('/dashboard/products', [ProductController::class, 'showProducts'])
     ->name('products.index')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, STOCK, SALES']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,STOCK,SALES']);
 
 Route::post('/dashboard/products/new', [ProductController::class, 'createProduct'])
     ->name('products.store')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, STOCK']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,STOCK']);
 
 Route::get('/dashboard/products/new', [ProductController::class, 'showCreateForm'])
     ->name('products.new')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, STOCK']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,STOCK']);
 
 
 Route::get('/dashboard/products/{id}', [ProductController::class, 'showProduct'])
     ->name('products.show')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, STOCK, SALES']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,STOCK,SALES']);
 
 Route::get('/dashboard/products/{id}/edit', [ProductController::class, 'showEditForm'])
     ->name('products.edit')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, STOCK']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,STOCK']);
 
 Route::post('/dashboard/products/{id}/edit', [ProductController::class, 'updateProduct'])
     ->name('products.update')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, STOCK']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,STOCK']);
 
 Route::delete('/dashboard/products', [ProductController::class, 'deleteProduct'])
     ->name('products.delete')
-    ->middleware(['auth', RoleMiddleware::class.':ADMIN, STOCK']);
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,STOCK']);
 
 
