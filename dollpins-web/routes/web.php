@@ -140,7 +140,7 @@ Route::get('/dashboard/orders/{order}/lastStep', [OrderController::class, 'showF
     ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::post('/dashboard/orders/{order}/lastStep', [OrderController::class, 'saveOrder'])
-    ->name('orders.create.last')
+    ->name('orders.create.Post')
     ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::get('/track/{order}', [OrderController::class, 'trackOrder'])
