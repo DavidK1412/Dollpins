@@ -10,8 +10,9 @@ class OrderProducts extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 
-    protected $fillable = ['order_id', 'product_id', 'quantity', 'price'];
+    protected $fillable = ['id', 'order_id', 'product_id', 'quantity', 'price'];
 
     public function order()
     {

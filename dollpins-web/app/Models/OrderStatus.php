@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderStatus extends Model
 {
-    protected $table = 'OrderStatusRepository';
+    protected $table = 'OrderStatus';
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $keyType = 'int';

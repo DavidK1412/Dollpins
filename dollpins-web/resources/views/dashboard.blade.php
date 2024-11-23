@@ -36,7 +36,7 @@
                 Clientes
             </a>
 
-            <a href="#">
+            <a href="{{Route('orders.index', ['filter' => 'Pendiente'])}}">
                 Pedidos
             </a>
             @endif

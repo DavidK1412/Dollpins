@@ -6,6 +6,7 @@ use App\Http\Controllers\PasswordRecoveryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 use App\Http\Middleware\RoleMiddleware;
 
@@ -114,4 +115,41 @@ Route::delete('/dashboard/products', [ProductController::class, 'deleteProduct']
     ->name('products.delete')
     ->middleware(['auth', RoleMiddleware::class.':ADMIN,STOCK']);
 
+Route::get('/dashboard/orders/table/{filter}', [OrderController::class, 'index'])
+    ->name('orders.index')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
+Route::get('/dashboard/orders/new', [OrderController::class, 'showCreateForm'])
+    ->name('orders.new')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
+
+Route::post('/dashboard/orders/new', [OrderController::class, 'createFirstStep'])
+    ->name('orders.create.first')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
+
+Route::get('/dashboard/orders/{order}', [OrderController::class, 'showSecondStep'])
+    ->name('orders.create.second')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
+
+Route::post('/dashboard/orders/{order}', [OrderController::class, 'mutateSecondStep'])
+    ->name('orders.create.second')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
+
+Route::get('/dashboard/orders/{order}/lastStep', [OrderController::class, 'showFinalStep'])
+    ->name('orders.create.last')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
+
+Route::post('/dashboard/orders/{order}/lastStep', [OrderController::class, 'saveOrder'])
+    ->name('orders.create.last')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
+
+Route::get('/track/{order}', [OrderController::class, 'trackOrder'])
+    ->name('orders.track');
+
+Route::get('/dashboard/orders/{id}/detail', [OrderController::class, 'showOrder'])
+    ->name('orders.show')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
+
+Route::get('/dashboard/orders/{order}/uprade', [OrderController::class, 'upgradeOrderStatus'])
+    ->name('orders.upgrade')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);

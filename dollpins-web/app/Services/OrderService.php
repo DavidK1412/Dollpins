@@ -13,7 +13,7 @@ class OrderService
     private $orderStatusRepository;
     private $orderProductsRepository;
 
-    public function __construct(OrderRepository $orderRepository, OrderStatusRepository $orderStatusRepository, OrderProductsRepository $orderProductsRepository)
+    public function __construct(OrderRepository $orderRepository, OrderStatusRepository $orderStatusRepository ,OrderProductsRepository $orderProductsRepository)
     {
         $this->orderRepository = $orderRepository;
         $this->orderStatusRepository = $orderStatusRepository;
@@ -59,11 +59,13 @@ class OrderService
     public function addProduct($order_id, $product_id, $quantity, $price)
     {
         $data = [
-            'id' => Str::uuid(),
+            'id' => (string) Str::uuid(),
             'order_id' => $order_id,
             'product_id' => $product_id,
             'quantity' => $quantity,
             'price' => $price
         ];
+
+        return $this->orderProductsRepository->create($data);
     }
 }

@@ -18,7 +18,7 @@ class OrderRepository
         return $this->order->all();
     }
 
-    public function create(array $data)
+    public function createOrder(array $data)
     {
         return $this->order->create($data);
     }

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\OrderProducts;
+use Illuminate\Support\Facades\DB;
 
 class OrderProductsRepository
 {
@@ -45,7 +46,11 @@ class OrderProductsRepository
 
     public function findByOrderId($order_id)
     {
-        return $this->orderProducts->where('order_id', $order_id)->get();
+        return DB::table('OrderProducts')
+            ->join('Product', 'OrderProducts.product_id', '=', 'Product.id')
+            ->where('OrderProducts.order_id', $order_id)
+            ->select('OrderProducts.*', 'Product.name')
+            ->get();
     }
 
 }

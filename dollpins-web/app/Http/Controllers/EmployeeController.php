@@ -85,8 +85,8 @@ class EmployeeController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:employee',
-            'document' => 'required|unique:employee',
+            'email' => 'required|email|unique:Employee',
+            'document' => 'required|unique:Employee',
             'address' => 'required',
             'city' => 'required',
             'positions' => 'required',

@@ -6,9 +6,9 @@ use App\Models\OrderStatus;
 
 class OrderStatusRepository
 {
-    protected OrderStatusRepository $orderStatus;
+    protected OrderStatus $orderStatus;
 
-    public function __construct(OrderStatusRepository $orderStatus)
+    public function __construct(OrderStatus $orderStatus)
     {
         $this->orderStatus = $orderStatus;
     }
