@@ -153,66 +153,65 @@ class EmployeeController extends Controller
         return redirect()->route('employees.show')->with('success', 'Empleado eliminado exitosamente.');
     }
 
-
-//metodos para telefono empleado
+    //metodos para telefono empleado
     public function showEmployeeCellphones($id)
-{
-    $employee = $this->employeeService->getEmployeeById($id);
-    return view('panels.employees.cellphone', [
-        'employee' => $employee,
-        'cellphones' => $employee->cellphones
-    ]);
-}
+    {
+        $employee = $this->employeeService->getEmployeeById($id);
+        return view('panels.employees.cellphone', [
+            'employee' => $employee,
+            'cellphones' => $employee->cellphones
+        ]);
+    }
 
-public function storeCellphone(Request $request, $employee_id)
-{
-    $data = $request->validate([
-        'cellphone' => 'required|string|min:7|max:15',
-        'relationship' => 'required|string|max:36'
-    ]);
+    public function storeCellphone(Request $request, $employee_id)
+    {
+        $data = $request->validate([
+            'cellphone' => 'required|string|min:7|max:15',
+            'relationship' => 'required|string|max:36'
+        ]);
 
-    $this->employeeService->assignEmployeeCellphone(
-        $employee_id,
-        $data['cellphone'],
-        $data['relationship']
-    );
+        $this->employeeService->assignEmployeeCellphone(
+            $employee_id,
+            $data['cellphone'],
+            $data['relationship']
+        );
 
-    return redirect()
-        ->route('employee.phone', $employee_id)
-        ->with('success', 'Teléfono agregado exitosamente.');
-}
+        return redirect()
+            ->route('employee.phone', $employee_id)
+            ->with('success', 'Teléfono agregado exitosamente.');
+    }
 
-public function updateCellphone(Request $request, $employee_id)
-{
-    $data = $request->validate([
-        'cellphone' => 'required|string|min:7|max:15',
-        'relationship' => 'required|string|max:36',
-        'id' => 'required|string'
-    ]);
+    public function updateCellphone(Request $request, $employee_id)
+    {
+        $data = $request->validate([
+            'cellphone' => 'required|string|min:7|max:15',
+            'relationship' => 'required|string|max:36',
+            'id' => 'required|string'
+        ]);
 
-    $this->employeeService->updateEmployeeCellphone(
-        $employee_id,
-        $data['id'],
-        $data['cellphone'],
-        $data['relationship']
-    );
+        $this->employeeService->updateEmployeeCellphone(
+            $employee_id,
+            $data['id'],
+            $data['cellphone'],
+            $data['relationship']
+        );
 
-    return redirect()
-        ->route('employee.phone', $employee_id)
-        ->with('success', 'Teléfono actualizado exitosamente.');
-}
+        return redirect()
+            ->route('employee.phone', $employee_id)
+            ->with('success', 'Teléfono actualizado exitosamente.');
+    }
 
-public function deleteCellphone(Request $request, $employee_id)
-{
-    $data = $request->validate([
-        'id' => 'required|string'
+    public function deleteCellphone(Request $request, $employee_id)
+    {
+        $data = $request->validate([
+            'id' => 'required|string'
 
-    ]);
-    $this->employeeService->removeEmployeeCellphone($employee_id, $data['id']);
-    
-    return redirect()
-        ->route('employee.phone', $employee_id)
-        ->with('success', 'Teléfono eliminado exitosamente.');
-}
+        ]);
+        $this->employeeService->removeEmployeeCellphone($employee_id, $data['id']);
+
+        return redirect()
+            ->route('employee.phone', $employee_id)
+            ->with('success', 'Teléfono eliminado exitosamente.');
+    }
 
 }

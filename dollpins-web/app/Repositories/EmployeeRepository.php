@@ -99,5 +99,10 @@ class EmployeeRepository
             ->delete();
     }
 
+    public function getEmployeeByUserId($user_id)
+    {
+        return $this->employee->where('user_id', $user_id)->first();
+    }
+
 
 }

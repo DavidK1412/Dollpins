@@ -98,14 +98,19 @@ class EmployeeService
         public function updateEmployeeCellphone($employee_id, $phone_id, $phone_number, $relationship)
         {
             $employee = $this->getEmployeeById($employee_id);
-            
+
             $cellphone = $employee->cellphones()
                 ->where('id', $phone_id)
                 ->firstOrFail();
-            
+
             $cellphone->update([
                 'cellphone' => $phone_number,
                 'relationship' => $relationship
             ]);
+        }
+
+        public function getEmployeeByUserId($user_id)
+        {
+            return $this->employeeRepository->getEmployeeByUserId($user_id);
         }
     }

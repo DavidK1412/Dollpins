@@ -27,6 +27,19 @@ class ProductService
         return $products;
     }
 
+    public function getStockProducts()
+    {
+        $products = $this->getAllProducts();
+        $stockProducts = [];
+        foreach ($products as $product) {
+            if ($product->stock > 0) {
+                $stockProducts[] = $product;
+            }
+        }
+
+        return $stockProducts;
+    }
+
     public function getProductById($id)
     {
         return $this->productRepository->findById($id);
