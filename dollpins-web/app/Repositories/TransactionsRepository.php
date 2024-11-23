@@ -33,4 +33,9 @@ class TransactionsRepository
         return $this->transactions->where('id', $id)->delete();
     }
 
+    public function getAll()
+    {
+        return $this->transactions->all();
+    }
+
 }

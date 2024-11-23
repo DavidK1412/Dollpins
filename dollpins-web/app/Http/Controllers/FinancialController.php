@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\TransactionsService;
+use Illuminate\Http\Request;
 
 class FinancialController extends Controller
 {
@@ -15,13 +16,15 @@ class FinancialController extends Controller
 
     public function index()
     {
-        $transactions = $this->transactionsService->all();
-        return view('transactions.index', compact('transactions'));
+        $transactions = $this->transactionsService->getAllTransactions();
+        return view('panels.transactions.index', compact('transactions'));
     }
 
     public function showCreateForm()
     {
-        return view('transactions.create');
+        $transactionTypes = $this->transactionsService->getAllTransactionTypes();
+
+        return view('panels.transactions.create', compact('transactionTypes'));
     }
 
     public function create(Request $request)
@@ -34,15 +37,18 @@ class FinancialController extends Controller
             ]
         );
 
-        $this->transactionsService->create($data);
+        $this->transactionsService->createTransaction($data);
 
-        return redirect()->route('transactions.index');
+        return redirect()->route('transactions.index')->with(
+            'success',
+            'Transaction registrada satisfactoriamente'
+        );
     }
 
     public function detail($id)
     {
-        $transaction = $this->transactionsService->findById($id);
-        return view('transactions.detail', compact('transaction'));
+        $transaction = $this->transactionsService->getTransactions($id);
+        return view('panels.transactions.detail', compact('transaction'));
     }
 
 

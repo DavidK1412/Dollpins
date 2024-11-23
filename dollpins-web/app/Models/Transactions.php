@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transactions extends Model
 {
-    protected $table = 'transactions';
+    protected $table = 'Transactions';
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $incrementing = false;

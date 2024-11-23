@@ -41,11 +41,11 @@
             </a>
             @endif
             @if(hasRole(['ADMIN', 'FINANCES']))
-            <a href="#">
+            <a href="{{Route('transactions.index') }}">
                 Finanzas
             </a>
             <a href="#">
-                Estadísticas
+                Nómina
             </a>
             @endif
         </div>

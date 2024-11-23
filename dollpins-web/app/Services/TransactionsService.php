@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Repositories\TransactionsRepository;
 use App\Repositories\TransactionsTypeRepository;
 
+use Illuminate\Support\Str;
+
 class TransactionsService
 {
     private $transactionsRepository;
@@ -21,8 +23,10 @@ class TransactionsService
         return $this->transactionsRepository->getTransactions($id);
     }
 
-    public function createTransactions($data)
+    public function createTransaction($data)
     {
+        $data['id'] = Str::uuid();
+
         return $this->transactionsRepository->createTransactions($data);
     }
 
@@ -38,6 +42,11 @@ class TransactionsService
 
     public function getAllTransactions()
     {
-        return $this->transactionsRepository->all();
+        return $this->transactionsRepository->getAll();
+    }
+
+    public function getAllTransactionTypes()
+    {
+        return $this->transactionsTypeRepository->getAll();
     }
 }

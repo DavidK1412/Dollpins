@@ -7,6 +7,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FinancialController;
 
 use App\Http\Middleware\RoleMiddleware;
 
@@ -153,3 +154,19 @@ Route::get('/dashboard/orders/{id}/detail', [OrderController::class, 'showOrder'
 Route::get('/dashboard/orders/{order}/uprade', [OrderController::class, 'upgradeOrderStatus'])
     ->name('orders.upgrade')
     ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
+
+Route::get('/dashboard/transactions/', [FinancialController::class, 'index'])
+    ->name('transactions.index')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/transactions/new', [FinancialController::class, 'showCreateForm'])
+    ->name('transactions.new')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::post('/dashboard/transactions/new', [FinancialController::class, 'create'])
+    ->name('transactions.store')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/transactions/{id}', [FinancialController::class, 'detail'])
+    ->name('transactions.show')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);

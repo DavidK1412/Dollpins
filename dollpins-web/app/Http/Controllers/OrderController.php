@@ -9,6 +9,7 @@ use App\Services\OrderService;
 use App\Services\EmployeeService;
 use App\Services\ClientService;
 use App\Services\ProductService;
+use App\Services\TransactionsService;
 
 class OrderController extends Controller
 {
@@ -17,19 +18,22 @@ class OrderController extends Controller
     protected $employeeService;
     protected $clientService;
     protected $productService;
+    protected $transactionService;
 
     public function __construct(
         OrderService $orderService,
         MailService $mailService,
         EmployeeService $employeeService,
         ClientService $clientService,
-        ProductService $productService
+        ProductService $productService,
+        TransactionsService $transactionService
     ) {
         $this->orderService = $orderService;
         $this->mailService = $mailService;
         $this->employeeService = $employeeService;
         $this->clientService = $clientService;
         $this->productService = $productService;
+        $this->transactionService = $transactionService;
     }
 
     public function index($filter)
@@ -131,7 +135,16 @@ class OrderController extends Controller
         unset($order['products']);
         $order->save();
 
-        return redirect()->route('orders.index')->with(
+        $transactionData = [
+            'amount' => $order->total,
+            'description' => 'Venta de productos a '.$order->client->name.' id venta: '.$order->id,
+            'type_id' => 1,
+        ];
+        $this->transactionService->createTransaction($transactionData);
+
+        return redirect()->route('orders.index', [
+            'filter' => 'Pendiente',
+        ])->with(
             'success',
             'Orden creada exitosamente.'
         );
