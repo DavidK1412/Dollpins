@@ -20,9 +20,11 @@
                     <label for="product" class="form-label">Producto</label>
                     <select name="product_id" id="product" class="form-select"  required>
                         @foreach($products as $product)
+                            @if($product->status != 2)
                             <option value="{{ $product->id }}" data-stock="{{ $product->stock }}" data-price="{{ $product->price }}">
                                 {{ $product->name }} - ${{ $product->price }} - Stock: {{ $product->stock }}
                             </option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

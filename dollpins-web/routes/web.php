@@ -132,7 +132,7 @@ Route::get('/dashboard/orders/{order}', [OrderController::class, 'showSecondStep
     ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::post('/dashboard/orders/{order}', [OrderController::class, 'mutateSecondStep'])
-    ->name('orders.create.second')
+    ->name('orders.create.secondPost')
     ->middleware(['auth', RoleMiddleware::class.':ADMIN,SALES']);
 
 Route::get('/dashboard/orders/{order}/lastStep', [OrderController::class, 'showFinalStep'])
