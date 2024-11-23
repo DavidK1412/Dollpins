@@ -161,3 +161,65 @@ CREATE TABLE IF NOT EXISTS "Product" (
     category_id integer NOT NULL REFERENCES "Category",
     status integer
 );
+
+CREATE TABLE IF NOT EXISTS "OrderStatus" (
+    id serial PRIMARY KEY,
+    name varchar(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "Order" (
+    id varchar(36) PRIMARY KEY,
+    client_id varchar(36) NOT NULL REFERENCES "Client",
+    status_id integer NOT NULL REFERENCES "OrderStatus",
+    employee_id varchar(36) NOT NULL REFERENCES "Employee",
+    discount decimal NOT NULL,
+    extras decimal NOT NULL,
+    sub_total decimal NOT NULL,
+    total decimal NOT NULL,
+    delivery_address varchar(255) NOT NULL,
+    created_at timestamp default CURRENT_TIMESTAMP,
+    updated_at timestamp default CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS "OrderProducts" (
+    id VARCHAR(36) PRIMARY KEY,
+    order_id VARCHAR(36) NOT NULL REFERENCES "Order",
+    product_id VARCHAR(36) NOT NULL REFERENCES "Product",
+    quantity INTEGER NOT NULL,
+    price DECIMAL NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "Payroll" (
+    id          VARCHAR(36) PRIMARY KEY,
+    employee_id VARCHAR(36) NOT NULL REFERENCES "Employee",
+    salary      DECIMAL     NOT NULL,
+    status      INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS "PayrollPayments" (
+    id          VARCHAR(36) PRIMARY KEY,
+    payroll_id  VARCHAR(36) NOT NULL REFERENCES "Payroll",
+    amount      DECIMAL     NOT NULL,
+    payment_date TIMESTAMP   NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "PaymentAddon" (
+    id VARCHAR(36) PRIMARY KEY,
+    payment_id VARCHAR(36) NOT NULL REFERENCES "PayrollPayments",
+    description TEXT NOT NULL,
+    amount DECIMAL NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "TransactionsType" (
+    id serial PRIMARY KEY,
+    name varchar(255) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS "Transactions" (
+    id VARCHAR(36) PRIMARY KEY,
+    type_id INTEGER NOT NULL REFERENCES "TransactionsType",
+    amount DECIMAL NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

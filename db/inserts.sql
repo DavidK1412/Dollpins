@@ -24,3 +24,16 @@ INSERT INTO public."EmployeePosition" (id, employee_id, position_id) VALUES ('7c
 INSERT INTO public."UserRole" (id, user_id, role_id) VALUES ('cd993bd5-fd9e-45ad-9bcb-5dd33c1486e9', '26d787c2-1ec5-414c-804a-90c751361212', 1);
 INSERT INTO public."UserRole" (id, user_id, role_id) VALUES ('7005b837-6652-4052-af19-0e10f7f5d2e7', '26d787c2-1ec5-414c-804a-90c751361212', 2);
 INSERT INTO public."UserRole" (id, user_id, role_id) VALUES ('7d3bbaae-c652-4997-ac24-775b8ec76099', 'd975e0b9-efa4-4df4-801b-5568ea391204', 3);
+
+INSERT INTO public."OrderStatus"(id, name) VALUES (1, 'Pendiente');
+INSERT INTO public."OrderStatus"(id, name) VALUES (2, 'Enviado');
+INSERT INTO public."OrderStatus"(id, name) VALUES (3, 'Finalizado');
+
+INSERT INTO public."TransactionsType"(id, name) VALUES (1, 'Venta');
+INSERT INTO public."TransactionsType"(id, name) VALUES (2, 'Pago proveedor');
+INSERT INTO public."TransactionsType"(id, name) VALUES (3, 'Pago nómina');
+INSERT INTO public."TransactionsType"(id, name) VALUES (4, 'Pago servicios');
+INSERT INTO public."TransactionsType"(id, name) VALUES (5, 'Pago terceros');
+INSERT INTO public."TransactionsType"(id, name) VALUES (6, 'Imprevistos');
+INSERT INTO public."TransactionsType"(id, name) VALUES (7, 'Inversiones');
+INSERT INTO public."TransactionsType"(id, name) VALUES (8, 'Otros');
