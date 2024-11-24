@@ -12,7 +12,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <a href="{{ Route('payrolls.new')  }}" class="btn btn-success" style="background-color: #8fd6c8 !important;"><i class="bi bi-bookmark-plus"></i> Registrar modelo. </a>
+    <a href="{{ Route('payrolls.new')  }}" class="btn btn-success" style="background-color: #8fd6c8 !important;"><i class="bi bi-bookmark-plus"></i> Registrar modelo </a>
     <table id="example" class="table table-bordered table-hover nowrap" style="width:100%">
         <thead>
         <tr>

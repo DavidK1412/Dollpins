@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-custom" type="submit">Registrar módelo</button>
+            <button class="btn btn-custom" type="submit">Registrar modelo</button>
         </form>
     </div>
 @endsection

@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-custom" type="submit">Actualizar módelo</button>
+            <button class="btn btn-custom" type="submit">Actualizar modelo</button>
         </form>
     </div>
 @endsection

@@ -43,7 +43,6 @@
                 Información pago
             </h5>
             <p class="card-text">
-                A continuación se muestra el valor actual con los adicionales existentes.
             </p>
             <div class="row">
                 <div class="table-container col-6">
