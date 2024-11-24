@@ -33,7 +33,6 @@
 @section('dashboard-panel')
     <!-- Muestra información del pago -->
     <div class="card text-center">
-        
         <div class="card-header">
             <h1>
                 Pago de nómina - Insertar adicional

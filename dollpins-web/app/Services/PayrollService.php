@@ -15,7 +15,7 @@ class PayrollService
     private $paymentAddonRepository;
     private $payrollPaymentsRepository;
 
-    public function __construct(PayrollRepository $payrollRepository, PaymentAddonRepository $paymentAddonRepository, PayrollPaymentsRepository $payrollPaymentsRepository)
+    public function __construct(PayRollRepository $payrollRepository, PaymentAddonRepository $paymentAddonRepository, PayrollPaymentsRepository $payrollPaymentsRepository)
     {
         $this->payrollRepository = $payrollRepository;
         $this->paymentAddonRepository = $paymentAddonRepository;
