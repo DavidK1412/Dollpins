@@ -6,9 +6,10 @@ use App\Models\PaymentAddon;
 
 class PaymentAddonRepository
 {
+
     private $paymentAddon;
 
-    public function __construct(PaymentAddonRepository $paymentAddon)
+    public function __construct(PaymentAddon $paymentAddon)
     {
         $this->paymentAddon = $paymentAddon;
     }
@@ -31,6 +32,11 @@ class PaymentAddonRepository
     public function deletePaymentAddon($id)
     {
         return $this->paymentAddon->where('id', $id)->delete();
+    }
+
+    public function getPaymentAddonsByPaymentId($payment_id)
+    {
+        return $this->paymentAddon->where('payment_id', $payment_id)->get();
     }
 
 }

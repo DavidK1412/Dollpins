@@ -10,6 +10,7 @@ class Payroll extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 
     protected $fillable = ['id', 'employee_id', 'salary', 'status'];
 

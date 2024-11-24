@@ -13,29 +13,29 @@ class PayrollPaymentsRepository
         $this->payrollPayments = $payrollPayments;
     }
 
-    public function create($data)
+    public function getPayrollPayments($id)
     {
-        return PayrollPayments::create($data);
+        return $this->payrollPayments->find($id);
     }
 
-    public function update($id, $data)
+    public function createPayrollPayments($data)
     {
-        return PayrollPayments::where('id', $id)->update($data);
+        return $this->payrollPayments->create($data);
     }
 
-    public function delete($id)
+    public function updatePayrollPayments($id, $data)
     {
-        return PayrollPayments::where('id', $id)->delete();
+        return $this->payrollPayments->where('id', $id)->update($data);
     }
 
-    public function get($id)
+    public function deletePayrollPayments($id)
     {
-        return PayrollPayments::where('id', $id)->first();
+        return $this->payrollPayments->where('id', $id)->delete();
     }
 
-    public function all()
+    public function getPayrollPaymentsByPayrollId($payroll_id)
     {
-        return PayrollPayments::all();
+        return $this->payrollPayments->where('payroll_id', $payroll_id)->get();
     }
 
 }

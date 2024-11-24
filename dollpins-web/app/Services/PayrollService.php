@@ -6,6 +6,9 @@ use App\Repositories\PayrollRepository;
 use App\Repositories\PaymentAddonRepository;
 use App\Repositories\PayrollPaymentsRepository;
 
+use Illuminate\Support\Str;
+
+
 class PayrollService
 {
     private $payrollRepository;
@@ -21,12 +24,14 @@ class PayrollService
 
     public function getPayroll($id)
     {
-        return $this->payrollRepository->getPayroll($id);
+        return $this->payrollRepository->getPayRollById($id);
     }
 
     public function createPayroll($data)
     {
-        return $this->payrollRepository->createPayroll($data);
+        $data['id'] = Str::uuid();
+
+        return $this->payrollRepository->createPayRoll($data);
     }
 
     public function updatePayroll($id, $data)
@@ -41,7 +46,42 @@ class PayrollService
 
     public function getAll()
     {
-        return $this->payrollRepository->all();
+        return $this->payrollRepository->getPayRolls();
+    }
+
+    public function getPaymentsByPayrollId($id)
+    {
+        return $this->payrollPaymentsRepository->getPayrollPaymentsByPayrollId($id);
+    }
+
+    public function createPaymentAddon($data)
+    {
+        $data['id'] = Str::uuid();
+
+        return $this->paymentAddonRepository->createPaymentAddon($data);
+    }
+
+    public function getPayment($id)
+    {
+        return $this->payrollPaymentsRepository->getPayrollPayments($id);
+    }
+
+    public function createPayment($data)
+    {
+        $data['id'] = Str::uuid();
+        $data['payment_date'] = now();
+
+        return $this->payrollPaymentsRepository->createPayrollPayments($data);
+    }
+
+    public function updatePayment($id, $data)
+    {
+        return $this->payrollPaymentsRepository->updatePayrollPayments($id, $data);
+    }
+
+    public function getPaymentAddons($id)
+    {
+        return $this->paymentAddonRepository->getPaymentAddonsByPaymentId($id);
     }
 
 }

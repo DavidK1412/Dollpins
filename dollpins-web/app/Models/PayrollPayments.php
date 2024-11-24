@@ -10,8 +10,9 @@ class PayrollPayments extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 
-    protected $fillable = ['payroll_id', 'amount', 'payment_date'];
+    protected $fillable = ['id', 'payroll_id', 'amount', 'payment_date'];
 
     public function payroll()
     {

@@ -8,7 +8,7 @@ class PayRollRepository
 {
     private $payroll;
 
-    public function __construct(PayRollRepository $payroll)
+    public function __construct(PayRoll $payroll)
     {
         $this->payroll = $payroll;
     }
@@ -16,26 +16,22 @@ class PayRollRepository
 
     public function getPayRolls()
     {
-        return PayRollRepository::all();
+        return $this->payroll->all();
     }
 
     public function getPayRollById($id)
     {
-        return PayRollRepository::find($id);
+        return $this->payroll->find($id);
     }
 
     public function createPayRoll($data)
     {
-        return PayRollRepository::create($data);
+        return $this->payroll->create($data);
     }
 
-    public function updatePayRoll($id, $data)
+    public function updatePayroll($id, $data)
     {
-        return PayRollRepository::find($id)->update($data);
+        return $this->payroll->where('id', $id)->update($data);
     }
 
-    public function deletePayRoll($id)
-    {
-        return PayRollRepository::destroy($id);
-    }
 }

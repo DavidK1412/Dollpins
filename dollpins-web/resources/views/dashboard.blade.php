@@ -44,7 +44,7 @@
             <a href="{{Route('transactions.index') }}">
                 Finanzas
             </a>
-            <a href="#">
+            <a href="{{Route('payrolls.index')}}">
                 Nómina
             </a>
             @endif

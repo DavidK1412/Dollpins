@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FinancialController;
+use App\Http\Controllers\PayrollController;
 
 use App\Http\Middleware\RoleMiddleware;
 
@@ -169,4 +170,48 @@ Route::post('/dashboard/transactions/new', [FinancialController::class, 'create'
 
 Route::get('/dashboard/transactions/{id}', [FinancialController::class, 'detail'])
     ->name('transactions.show')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/payrolls', [PayrollController::class, 'index'])
+    ->name('payrolls.index')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/payrolls/new', [PayrollController::class, 'showCreateForm'])
+    ->name('payrolls.new')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::post('/dashboard/payrolls/new', [PayrollController::class, 'create'])
+    ->name('payrolls.store')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/payrolls/edit/{id}', [PayrollController::class, 'showEditForm'])
+    ->name('payrolls.edit')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::post('/dashboard/payrolls/edit/{id}', [PayrollController::class, 'edit'])
+    ->name('payrolls.update')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/payrolls/{id}', [PayrollController::class, 'payrollPayments'])
+    ->name('payrolls.detail')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/payrolls/{payroll_id}/new', [PayrollController::class, 'showPaymentForm'])
+    ->name('payrolls.newPayment')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/payment/{payment_id}/addons/', [PayrollController::class, 'showPaymentAddonForm'])
+    ->name('payrolls.newPaymentAddon')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::post('/dashboard/payment/{payment_id}/addons/', [PayrollController::class, 'storePaymentAddon'])
+    ->name('payrolls.storePaymentAddon')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/payrolls/{payment_id}/process', [PayrollController::class, 'processPayment'])
+    ->name('payrolls.processPayment')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get('/dashboard/payrolls/{payment_id}/fulled_detail', [PayrollController::class, 'paymentDetail'])
+    ->name('payrolls.detailPayment')
     ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
