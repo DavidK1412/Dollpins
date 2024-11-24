@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\PayrollRepository;
+use App\Repositories\PayRollRepository;
 use App\Repositories\PaymentAddonRepository;
 use App\Repositories\PayrollPaymentsRepository;
 
