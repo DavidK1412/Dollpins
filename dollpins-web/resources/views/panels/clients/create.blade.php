@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-custom" type="submit">Agregar Empleado</button>
+            <button class="btn btn-custom" type="submit">Agregar Cliente</button>
         </form>
     </div>
 @endsection
