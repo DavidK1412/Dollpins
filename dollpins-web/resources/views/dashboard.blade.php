@@ -47,6 +47,9 @@
             <a href="{{Route('payrolls.index')}}">
                 Nómina
             </a>
+                <a href="{{Route('stats.index')}}">
+                    Estadisticas
+                </a>
             @endif
         </div>
         <a href="{{Route('logout')}}" style="margin-top: auto;">

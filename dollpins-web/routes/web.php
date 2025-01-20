@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\StatsController;
 
 use App\Http\Middleware\RoleMiddleware;
 
@@ -215,3 +216,12 @@ Route::get('/dashboard/payrolls/{payment_id}/process', [PayrollController::class
 Route::get('/dashboard/payrolls/{payment_id}/fulled_detail', [PayrollController::class, 'paymentDetail'])
     ->name('payrolls.detailPayment')
     ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::get("/dashboard/stats", [StatsController::class, 'index'])
+    ->name('stats.index')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
+Route::post("/dashboard/stats/report", [StatsController::class, 'report'])
+    ->name('stats.report')
+    ->middleware(['auth', RoleMiddleware::class.':ADMIN,FINANCES']);
+
